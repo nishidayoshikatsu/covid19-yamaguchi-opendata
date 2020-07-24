@@ -423,8 +423,8 @@ class GraphData:
             insert_index,
 			{
                 "date": "2020/07/23",
-                "text": "山口県内で44, 45例目となる新型コロナウイルス感染症の感染者を確認",
-                "url": "https://www.pref.yamaguchi.lg.jp/cms/a15200/kansensyou/202007230001.html"
+                "text": "山口県内で46例目, 47例目となる新型コロナウイルス感染症の感染者を確認",
+                "url": "https://www.pref.yamaguchi.lg.jp/cms/a15200/kansensyou/202007230002.html"
             }
 		)
 
