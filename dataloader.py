@@ -135,6 +135,7 @@ class GraphData:
             "patients_cnt.json",
             "patients.json",
             "inspections.json",
+            "inspections_person.json",
             "hospitalizations.json",
             "querents.json",
             "map_update.json",
@@ -149,6 +150,7 @@ class GraphData:
         self.generate_patients_cnt()
         self.generate_patients()
         self.generate_inspections()
+        self.generate_inspections_person()
         self.generate_hospitalizations()
         self.generate_querents()
         self.generate_maps()
@@ -213,6 +215,30 @@ class GraphData:
         with open(out_directory+ self.outfile[3], 'w') as f:
             json.dump(prev_data, f, ensure_ascii=False, indent=4, separators=(',', ': '))
 
+    def generate_inspections_person(self, origin_directory='origin_data/', out_directory='data/'):
+        with open(origin_directory + "inspections_people.json", encoding='utf-8') as f:
+            data = json.load(f)
+        with open("previous_data/inspections_person.json", encoding='utf-8') as f:
+            prev_data = json.load(f)
+        out = []
+        for dic in data["data"]:
+            dic["日付"] = dic.pop("実施_年月日")
+            dic["日付"] = self.format_date(dic["日付"])
+            dic["日付"] += "T08:00:00.000Z"
+            dic["小計"] = dic.pop("検査実施_人数 ")
+            del_list = ['全国地方公共団体コード', '都道府県名 ', '市区町村名 ', '備考']
+            [dic.pop(d) for d in del_list]
+            out.append(dic)
+
+        prev_data["data"].extend(out)
+        # 昨日までのデータがない場合は暫定で最後のデータを入力
+        # 土日だけ抜けてるとめんどくさい...月曜に土日のデータもいれてほしい
+        prev_data = self.add_data(prev_data, data)
+        prev_data["last_update"] = data["last_update"]
+        with open(out_directory + self.outfile[4], 'w') as f:
+            json.dump(prev_data, f, ensure_ascii=False, indent=4, separators=(',', ': '))
+
+
     def generate_hospitalizations(self, origin_directory='origin_data/', out_directory='data/'):
         with open(origin_directory + "inspections_people.json", encoding='utf-8') as f:
             data = json.load(f)
@@ -228,7 +254,7 @@ class GraphData:
         prev_data["data"][0]["死亡"] = data2["data"][-1]["死亡"]
         prev_data["data"][0]["陽性患者数"] = data2["data"][-1]["入院"] + data2["data"][-1]["退院"]
 
-        with open(out_directory+ self.outfile[4], 'w') as f:
+        with open(out_directory+ self.outfile[5], 'w') as f:
             json.dump(prev_data, f, ensure_ascii=False, indent=4, separators=(',', ': '))
 
     def generate_querents(self, origin_directory='origin_data/', out_directory='data/'):
@@ -251,7 +277,7 @@ class GraphData:
         # 土日だけ抜けてるとめんどくさい...月曜に土日のデータもいれてほしい
         prev_data = self.add_data(prev_data, data)
         prev_data["last_update"] = data["last_update"]
-        with open(out_directory+ self.outfile[5], 'w') as f:
+        with open(out_directory+ self.outfile[6], 'w') as f:
             json.dump(prev_data, f, ensure_ascii=False, indent=4, separators=(',', ': '))
 
     def generate_maps(self, origin_directory='origin_data/', out_directory='data/'):
@@ -358,11 +384,11 @@ class GraphData:
 
         plt.savefig(out_directory+"yamaguchi-map.png", bbox_inches='tight')
         #plt.show()
-        with open(out_directory+ self.outfile[6], 'w') as f:
+        with open(out_directory+ self.outfile[7], 'w') as f:
             json.dump(data["last_update"], f, ensure_ascii=False, indent=4, separators=(',', ': '))
 
     def generate_news(self, origin_directory='origin_data/', out_directory='data/'):
-        with open("previous_data/"+self.outfile[7], encoding='utf-8') as f:
+        with open("previous_data/"+self.outfile[8], encoding='utf-8') as f:
             prev_data = json.load(f)
 
         pat_url = "https://www.pref.yamaguchi.lg.jp/cms/a10000/korona2020/202004240002.html"
@@ -394,11 +420,11 @@ class GraphData:
 			}
 		)
 
-        with open(out_directory+ self.outfile[7], 'w') as f:
+        with open(out_directory+ self.outfile[8], 'w') as f:
             json.dump(prev_data, f, ensure_ascii=False, indent=4, separators=(',', ': '), sort_keys=True)
 
     def generate_eqal_news(self, origin_directory='origin_data/', out_directory='data/'):
-        with open("previous_data/"+self.outfile[7], encoding='utf-8') as f:
+        with open("previous_data/"+self.outfile[8], encoding='utf-8') as f:
             prev_data = json.load(f)
 
         newinfo_url = "https://www.pref.yamaguchi.lg.jp/press/rss.xml"
@@ -428,7 +454,7 @@ class GraphData:
             }
 		)
 
-        with open(out_directory+ self.outfile[7], 'w') as f:
+        with open(out_directory+ self.outfile[8], 'w') as f:
             json.dump(prev_data, f, ensure_ascii=False, indent=4, separators=(',', ': '), sort_keys=True)
 
     def format_date(self, date_str):
