@@ -281,6 +281,7 @@ class GraphData:
             json.dump(prev_data, f, ensure_ascii=False, indent=4, separators=(',', ': '))
 
     def generate_maps(self, origin_directory='origin_data/', out_directory='data/'):
+       
         with open(origin_directory + "patients.json", encoding='utf-8') as f:
             data = json.load(f)
         city_list = [
@@ -296,13 +297,13 @@ class GraphData:
         for key in city_dict.keys():
             if city_dict[key] == 0:
                 color_dict[key] = "white"
-            elif city_dict[key] <= 5:
-                color_dict[key] = "#b8f1d5"
             elif city_dict[key] <= 10:
+                color_dict[key] = "#b8f1d5"
+            elif city_dict[key] <= 20:
                 color_dict[key] = "#23b16a"
-            elif city_dict[key] <= 15:
+            elif city_dict[key] <= 30:
                 color_dict[key] = "#156a40"
-            elif color_dict[key] <= 20:
+            elif color_dict[key] <= 40:
                 color_dict[key] = "#0e472b"
             else:
                 color_dict[key] = "#031e11"
@@ -378,9 +379,9 @@ class GraphData:
         for i,heat in enumerate(heat_colorlist):
             base.add_patch(patches.Rectangle(xy=(131.83, 35.12-i*0.1), width=0.25, height=0.1, fc=heat, ec="black", fill=True))
             if i == 4:
-                base.text(132.09, 35.05-i*0.1+0.1, "・・・"+str(5*(i+1))+"以上")
+                base.text(132.09, 35.05-i*0.1+0.1, "・・・"+str(10*i+1)+"以上")
             else:
-                base.text(132.09, 35.05-i*0.1+0.1, "・・・"+str(5*i+1)+"-"+str(5*(i+1)))
+                base.text(132.09, 35.05-i*0.1+0.1, "・・・"+str(10*i+1)+"-"+str(10*(i+1)))
 
         plt.savefig(out_directory+"yamaguchi-map.png", bbox_inches='tight')
         #plt.show()
