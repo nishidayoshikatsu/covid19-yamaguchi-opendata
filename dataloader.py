@@ -252,7 +252,7 @@ class GraphData:
         prev_data["data"][0]["入院中"] = data2["data"][-1]["入院"]
         prev_data["data"][0]["退院"] = data2["data"][-1]["退院"]
         prev_data["data"][0]["死亡"] = data2["data"][-1]["死亡"]
-        prev_data["data"][0]["陽性患者数"] = data2["data"][-1]["入院"] + data2["data"][-1]["退院"]
+        prev_data["data"][0]["陽性患者数"] = data2["data"][-1]["入院"] + data2["data"][-1]["退院"] + data2["data"][-1]["死亡"]
 
         with open(out_directory+ self.outfile[5], 'w') as f:
             json.dump(prev_data, f, ensure_ascii=False, indent=4, separators=(',', ': '))
