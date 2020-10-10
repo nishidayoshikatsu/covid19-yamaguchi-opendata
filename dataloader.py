@@ -373,9 +373,9 @@ class GraphData:
             base.plot(pline[0], pline[1], color="black", linewidth = 0.8)
             base.text(cplace[0], cplace[1], cname, size=10, color="black")
             #base.text(cplace[0], cplace[1]-0.03, "ー"*len(cname), size=10, color="black")
-            base.text(cplace[0]+cplace2[0], cplace[1]+cplace2[1], str(city_dict[cname])+"例", size=11, color="black")
+            base.text(cplace[0]+cplace2[0], cplace[1]+cplace2[1], str(city_dict[cname])+"人", size=11, color="black")
 
-        base.text(131.88, 35.30, "陽性患者数【例】", size=12, color="black")
+        base.text(131.88, 35.30, "陽性患者数【人】", size=12, color="black")
         base.add_patch(patches.Rectangle(xy=(131.80, 34.70), width=0.71, height=0.55, ec="black", fill=False))
         for i,heat in enumerate(heat_colorlist):
             base.add_patch(patches.Rectangle(xy=(131.83, 35.12-i*0.1), width=0.25, height=0.1, fc=heat, ec="black", fill=True))
@@ -450,9 +450,9 @@ class GraphData:
         prev_data["newsItems"].insert(
             insert_index,
 			{
-                "date": "2020/10/08",
-                "text": "山口県内で208例目となる新型コロナウイルス感染症の感染者を確認",
-                "url": "https://www.pref.yamaguchi.lg.jp/cms/a15200/kansensyou/202010080001.html"
+                "date": "2020/10/09",
+                "text": "山口県内で209例目となる新型コロナウイルス感染症の感染者を確認",
+                "url": "https://www.pref.yamaguchi.lg.jp/cms/a15200/kansensyou/202010090001.html"
             }
 		)
 
