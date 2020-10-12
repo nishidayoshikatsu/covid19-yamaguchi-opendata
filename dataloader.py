@@ -523,7 +523,8 @@ class GraphData:
             date_str = d.get("公表日")
             dt = self.format_date(date_str)
             dt = datetime.date(int(dt[:4]), int(dt[5:7]), int(dt[8:10]))
-            date_list.append(dt)
+            if '欠番' not in d.get('備考'):
+                date_list.append(dt)
         c = collections.Counter(date_list)
         return c
 
