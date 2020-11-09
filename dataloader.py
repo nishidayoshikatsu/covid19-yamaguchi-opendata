@@ -292,7 +292,7 @@ class GraphData:
         city_dict = dict(zip(city_list, num_list))	# 各自治体の陽性患者人数のdictを作成
         heat_colorlist = ["#b8f1d5", "#23b16a", "#156a40", "#0e472b", "#031e11"]
         for d in data["data"]:
-            if d["市区町村名"]: city_dict[d["市区町村名"]] += 1
+            if d["市区町村名"] in city_dict: city_dict[d["市区町村名"]] += 1
             else: continue
         color_dict = city_dict.copy()
         for key in city_dict.keys():
