@@ -450,9 +450,9 @@ class GraphData:
         prev_data["newsItems"].insert(
             insert_index,
 			{
-                "date": "2021/01/12",
-                "text": "山口県内で722~731例目となる新型コロナウイルス感染症の感染者を確認",
-                "url": "https://www.pref.yamaguchi.lg.jp/cmsdata/3/c/e/3ceb7b7e5a5d8dbf97adcb6ae0232d8f.pdf"
+                "date": "2021/01/16",
+                "text": "山口県内で808~818例目となる新型コロナウイルス感染症の感染者を確認",
+                "url": "http://www.city.shimonoseki.lg.jp/www/contents/1583381707607/index.html"
             }
 		)
 
